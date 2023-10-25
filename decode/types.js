@@ -19,7 +19,7 @@ export const uint64 = (bigint)=>{
 export const uint32 = (bigint)=> Number(BigInt.asUintN(32, bigint))
 
 const toNum = (r)=>{
-  if (r <= Number.MAX_SAFE_INTEGER) && (r>=Number.MIN_SAFE_INTEGER) {
+  if ((r <= Number.MAX_SAFE_INTEGER) && (r>=Number.MIN_SAFE_INTEGER)) {
     r = Number(r)
   }
   return r
@@ -37,8 +37,8 @@ export const int32 = (bigint)=> Number(BigInt.asIntN(32, bigint))
 export const int64 = (bigint)=> toNum(BigInt.asIntN(64, bigint))
 export const sfixed32 = (bytes)=>_view(bytes).geInt32(0, true)
 export const sfixed64 = (bytes)=>_view(bytes).getBigInt64(0, true)
-export const sint32 = (bigint) => Number((bigint >> 1n) ^ = (-1n * = (bigint & 1n)))
-export const sint64 = (bigint)=> toNum((bigint >> 1n) ^ = (-1n * = (bigint & 1n)))
+export const sint32 = (bigint) => Number((bigint >> 1n) ^ (-1n * (bigint & 1n)))
+export const sint64 = (bigint)=> toNum((bigint >> 1n) ^ (-1n * (bigint & 1n)))
 export const string  = utf8d;
 // module.exports = {
 //   tag,
