@@ -1,6 +1,7 @@
 import Reader from './reader.js'
 
-export default (msg, li, func_li, repeated_id_li)=>{
+export default (func_li, repeated_id_li)=>(msg)=>{
+  var li = [];
   for (let [n,o] of Reader(msg)) {
     o = func_li[--n](o)
     if(repeated_id_li.includes(n)) {
