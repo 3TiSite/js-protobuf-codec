@@ -1,4 +1,6 @@
 import assert from 'nanoassert'
+import utf8d from '@3-/utf8/utf8d.js'
+import utf8e from '@3-/utf8/utf8e.js'
 
 export const wireTypes = {
   VARINT: 0,
@@ -101,7 +103,7 @@ export const tag = {
 export const string = {
   encode (str, buf = alloc(this, str), byteOffset = 0) {
     assert(typeof str === 'string')
-    const src = utf8.decode(str)
+    const src = utf8e(str)
     bytes.encode(src, buf, byteOffset)
     this.encode.bytes = bytes.encode.bytes
     return buf.subarray(byteOffset, byteOffset + this.encode.bytes)
@@ -279,16 +281,14 @@ export const enumerable = {
   MAX_VALUE: (1n << 31n) - 1n
 }
 
-export const enc = new TextEncoder()
-export const dec = new TextDecoder()
 
 export function alloc (ctx, ...data) {
   return new Uint8Array(ctx.encodingLength(...data))
 }
 
 export const utf8 = {
-  encode (buf) { return dec.decode(buf) },
-  decode (str) { return enc.encode(str) }
+  encode (buf) { return utf8d(buf) },
+  decode (str) { return utf8e(str) }
 }
 
 // module.exports = {

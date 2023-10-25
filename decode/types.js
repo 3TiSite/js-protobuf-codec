@@ -1,3 +1,5 @@
+import utf8d from '@3-/utf8/utf8d.js'
+
 export function tag (bigint) {
   const int = Number(bigint) // Safe as protoc only allows fieldNumber up to int32 + 3 bits for wireType
   const wireType = int & 0b111
@@ -42,10 +44,7 @@ export function bytes (bytes) {
   return bytes
 }
 
-const _dec = new TextDecoder()
-export function string (bytes) {
-  return _dec.decode(bytes)
-}
+export const string  = utf8d;
 
 export function fixed64 (bytes) {
   return _view(bytes).getBigUint64(0, true)
