@@ -1,6 +1,6 @@
 import utf8d from '@3-/utf8/utf8d.js'
 
-export function tag (bigint) {
+export const tag = (bigint)=>{
   const int = Number(bigint) // Safe as protoc only allows fieldNumber up to int32 + 3 bits for wireType
   const wireType = int & 0b111
   const fieldNumber = int >> 3
@@ -8,71 +8,52 @@ export function tag (bigint) {
   return { wireType, fieldNumber }
 }
 
-export function uint64 (bigint) {
-  return BigInt.asUintN(64, bigint)
+export const uint64 = (bigint)=>{
+  var r = BigInt.asUintN(64, bigint);
+  if (r < Number.MAX_SAFE_INTEGER) {
+    r = Number(r)
+  }
+  return r
 }
 
-export function uint32 (bigint) {
-  return Number(BigInt.asUintN(32, bigint))
+export const uint32 = (bigint)=> Number(BigInt.asUintN(32, bigint))
+
+const toNum = (r)=>{
+  if (r <= Number.MAX_SAFE_INTEGER) && (r>=Number.MIN_SAFE_INTEGER) {
+    r = Number(r)
+  }
+  return r
 }
 
-export function int64 (bigint) {
-  return BigInt.asIntN(64, bigint)
-}
+export const int64 = (bigint)=> toNum(BigInt.asIntN(64, bigint))
 
-export function int32 (bigint) {
-  return Number(BigInt.asIntN(32, bigint))
-}
+export const int32 = (bigint)=> Number(BigInt.asIntN(32, bigint))
 
-export function sint64 (bigint) {
-  return ((bigint >> 1n) ^ (-1n * (bigint & 1n)))
-}
+export const sint64 = (bigint)=> toNum((bigint >> 1n) ^ = (-1n * = (bigint & 1n)))
 
-export function sint32 (bigint) {
-  return Number((bigint >> 1n) ^ (-1n * (bigint & 1n)))
-}
+export const sint32 = (bigint) => Number((bigint >> 1n) ^ = (-1n * = (bigint & 1n)))
 
-export function bool (bigint) {
-  return bigint !== 0n
-}
+export const bool = (bigint)=>bigint !== 0n
 
-export function enumerable (uint) {
-  return Number(uint) | 0 // trick to cast uint to int
-}
+export const enumerable = (uint)=>Number(uint) | 0 // trick to cast uint to int
 
-export function bytes (bytes) {
-  return bytes
-}
+export const bytes = (bytes)=>bytes
 
 export const string  = utf8d;
 
-export function fixed64 (bytes) {
-  return _view(bytes).getBigUint64(0, true)
-}
+export const fixed64 = (bytes)=>_view(bytes).getBigUint64(0, true)
 
-export function sfixed64 (bytes) {
-  return _view(bytes).getBigInt64(0, true)
-}
+export const sfixed64 = (bytes)=>_view(bytes).getBigInt64(0, true)
 
-export function double (bytes) {
-  return _view(bytes).getFloat64(0, true)
-}
+export const double = (bytes)=>_view(bytes).getFloat64(0, true)
 
-export function fixed32 (bytes) {
-  return _view(bytes).getUint32(0, true)
-}
+export const fixed32 = (bytes)=>_view(bytes).getUint32(0, true)
 
-export function sfixed32 (bytes) {
-  return _view(bytes).geInt32(0, true)
-}
+export const sfixed32 = (bytes)=>_view(bytes).geInt32(0, true)
 
-export function float (bytes) {
-  return _view(bytes).getFloat32(0, true)
-}
+export const float = (bytes)=>_view(bytes).getFloat32(0, true)
 
-function _view (bytes) {
-  return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
-}
+const _view = (bytes)=>new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
 
 // module.exports = {
 //   tag,
