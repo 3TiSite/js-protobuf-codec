@@ -1,13 +1,13 @@
-const assert = require('nanoassert')
+import assert from 'nanoassert'
 
-const wireTypes = {
+export const wireTypes = {
   VARINT: 0,
   BYTES: 2,
   FIXED64: 1,
   FIXED32: 5
 }
 
-const varint = {
+export const varint = {
   encode (
     int,
     buf = alloc(this, int),
@@ -59,7 +59,7 @@ const varint = {
   MAX_VALUE: (1n << 64n) - 1n
 }
 
-const bytes = {
+export const bytes = {
   encode (src, buf = alloc(this, src), byteOffset = 0) {
     let o = byteOffset
     varint.encode(src.byteLength, buf, o)
@@ -74,7 +74,7 @@ const bytes = {
   }
 }
 
-const tag = {
+export const tag = {
   encode (
     fieldNumber,
     wireType,
@@ -98,7 +98,7 @@ const tag = {
   MAX_VALUE: (1n << 29n) - 1n
 }
 
-const string = {
+export const string = {
   encode (str, buf = alloc(this, str), byteOffset = 0) {
     assert(typeof str === 'string')
     const src = utf8.decode(str)
@@ -113,7 +113,7 @@ const string = {
   }
 }
 
-const uint64 = {
+export const uint64 = {
   encode (uint, buf = alloc(this, uint), byteOffset = 0) {
     assert(uint >= this.MIN_VALUE, 'uint exceeds MIN_VALUE')
     assert(uint <= this.MAX_VALUE, 'uint exceeds MAX_VALUE')
@@ -131,7 +131,7 @@ const uint64 = {
   MAX_VALUE: varint.MAX_VALUE
 }
 
-const int64 = {
+export const int64 = {
   encode (int, buf = alloc(this, int), byteOffset = 0) {
     assert(int >= this.MIN_VALUE, 'int exceeds MIN_VALUE')
     assert(int <= this.MAX_VALUE, 'int exceeds MAX_VALUE')
@@ -149,7 +149,7 @@ const int64 = {
   MAX_VALUE: (1n << 63n) - 1n
 }
 
-const sint64 = {
+export const sint64 = {
   encode (int, buf = alloc(this, int), byteOffset = 0) {
     assert(int >= this.MIN_VALUE, 'int exceeds MIN_VALUE')
     assert(int <= this.MAX_VALUE, 'int exceeds MAX_VALUE')
@@ -168,7 +168,7 @@ const sint64 = {
   MAX_VALUE: (1n << 63n) - 1n
 }
 
-const uint32 = {
+export const uint32 = {
   encode (uint, buf = alloc(this, uint), byteOffset = 0) {
     assert(uint >= this.MIN_VALUE, 'uint exceeds MIN_VALUE')
     assert(uint <= this.MAX_VALUE, 'uint exceeds MAX_VALUE')
@@ -186,7 +186,7 @@ const uint32 = {
   MAX_VALUE: (1n << 32n) - 1n
 }
 
-const int32 = {
+export const int32 = {
   encode (int, buf = alloc(this, int), byteOffset = 0) {
     assert(int >= this.MIN_VALUE, 'int exceeds MIN_VALUE')
     assert(int <= this.MAX_VALUE, 'int exceeds MAX_VALUE')
@@ -204,7 +204,7 @@ const int32 = {
   MAX_VALUE: (1n << 31n) - 1n
 }
 
-const sint32 = {
+export const sint32 = {
   encode (int, buf = alloc(this, int), byteOffset = 0) {
     assert(int >= this.MIN_VALUE, 'int exceeds MIN_VALUE')
     assert(int <= this.MAX_VALUE, 'int exceeds MAX_VALUE')
@@ -223,7 +223,7 @@ const sint32 = {
   MAX_VALUE: (1n << 31n) - 1n
 }
 
-const bool = {
+export const bool = {
   encode (val, buf = alloc(this), byteOffset = 0) {
     varint.encode(val === true ? 1 : 0, buf, byteOffset)
     this.encode.bytes = varint.encode.bytes
@@ -234,7 +234,7 @@ const bool = {
   }
 }
 
-const double = {
+export const double = {
   encode (val, buf = alloc(this), byteOffset = 0) {
     _view(buf).setFloat64(byteOffset, val, true)
     this.encode.bytes = 8
@@ -245,7 +245,7 @@ const double = {
   }
 }
 
-const float = {
+export const float = {
   encode (val, buf = alloc(this), byteOffset = 0) {
     _view(buf).setFloat32(byteOffset, val, true)
     this.encode.bytes = 4
@@ -260,7 +260,7 @@ function _view (bytes) {
   return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
 }
 
-const enumerable = {
+export const enumerable = {
   encode (en, buf = alloc(this, en), byteOffset = 0) {
     assert(en >= enumerable.MIN_VALUE, 'enum value exceeds MIN_VALUE')
     assert(en <= enumerable.MAX_VALUE, 'enum value exceeds MAX_VALUE')
@@ -279,34 +279,34 @@ const enumerable = {
   MAX_VALUE: (1n << 31n) - 1n
 }
 
-const enc = new TextEncoder()
-const dec = new TextDecoder()
+export const enc = new TextEncoder()
+export const dec = new TextDecoder()
 
-function alloc (ctx, ...data) {
+export function alloc (ctx, ...data) {
   return new Uint8Array(ctx.encodingLength(...data))
 }
 
-const utf8 = {
+export const utf8 = {
   encode (buf) { return dec.decode(buf) },
   decode (str) { return enc.encode(str) }
 }
 
-module.exports = {
-  wireTypes,
-  varint,
-  bytes,
-  tag,
-  string,
-  int64,
-  uint64,
-  sint64,
-  int32,
-  uint32,
-  sint32,
-  bool,
-  double,
-  float,
-  enumerable,
-  utf8,
-  alloc
-}
+// module.exports = {
+//   wireTypes,
+//   varint,
+//   bytes,
+//   tag,
+//   string,
+//   int64,
+//   uint64,
+//   sint64,
+//   int32,
+//   uint32,
+//   sint32,
+//   bool,
+//   double,
+//   float,
+//   enumerable,
+//   utf8,
+//   alloc
+// }

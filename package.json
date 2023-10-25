@@ -1,5 +1,6 @@
 {
-  "name": "protobuf-codec",
+  "name": "@3-/proto",
+  "type": "module",
   "version": "2.0.5",
   "description": "Minimal Protocol Buffers wire encoding/decoding",
   "scripts": {
@@ -8,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vegaprotocol/js-protobuf-codec.git"
+    "url": "git+https://github.com/3TiSite/js-protobuf-codec.git"
   },
   "keywords": [
     "protobuf",
@@ -19,15 +20,12 @@
     "encoding",
     "serde"
   ],
-  "author": "Emil Bay <emil@vega.xyz>",
+  "author": "3Ti.Site@gmail.com",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vegaprotocol/js-protobuf-codec/issues"
-  },
-  "homepage": "https://github.com/vegaprotocol/js-protobuf-codec#readme",
+  "homepage": "https://github.com/3TiSite/js-protobuf-codec",
   "devDependencies": {
-    "standard": "^17.0.0",
-    "tape": "^5.5.3"
+    "standard": "^17.1.0",
+    "tape": "^5.7.2"
   },
   "dependencies": {
     "nanoassert": "^2.0.0"
