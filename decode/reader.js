@@ -1,4 +1,4 @@
-import assert from 'nanoassert'
+// import assert from 'nanoassert'
 import { decoders, tag } from './wire-types.js'
 
 export default function * reader (
@@ -8,7 +8,7 @@ export default function * reader (
 ) {
   let o = byteOffset
   const end = byteOffset + byteLength
-  assert(end <= buf.byteLength)
+  // assert(end <= buf.byteLength)
 
   for (; o < end;) {
     const { wireType, fieldNumber } = tag(buf, o)
@@ -23,5 +23,5 @@ export default function * reader (
     yield [fieldNumber, { tagByteOffset, tagByteLength, fieldNumber, wireType, dataByteLength, data }]
   }
 
-  assert(o === end)
+  // assert(o === end)
 }

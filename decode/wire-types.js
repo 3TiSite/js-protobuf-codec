@@ -1,4 +1,4 @@
-import assert from 'nanoassert';
+// import assert from 'nanoassert';
 
 /**
  * Wire type decoders mapping the `type` integer to the basic decoder.
@@ -31,7 +31,7 @@ export function varint (buf, byteOffset = 0) {
     shift += 7n
   }
 
-  assert((buf[o] & 0b1000_0000) === 0, 'Malformed varint')
+  //assert((buf[o] & 0b1000_0000) === 0, 'Malformed varint')
 
   acc |= BigInt(buf[o++] & 0b0111_1111) << shift
 
@@ -42,7 +42,7 @@ export function varint (buf, byteOffset = 0) {
 export function bytes (buf, byteOffset = 0) {
   const len = varint(buf, byteOffset)
 
-  assert(buf.byteLength - byteOffset - varint.bytes >= len, 'Malformed bytes')
+  //assert(buf.byteLength - byteOffset - varint.bytes >= len, 'Malformed bytes')
   const b = buf.subarray(byteOffset + varint.bytes, byteOffset + varint.bytes + Number(len))
 
   bytes.bytes = varint.bytes + Number(len)
@@ -50,13 +50,13 @@ export function bytes (buf, byteOffset = 0) {
 }
 
 export function fixed64bit (buf, byteOffset = 0) {
-  assert(buf.byteLength - byteOffset >= 8, 'Malformed 64-bit')
+  //assert(buf.byteLength - byteOffset >= 8, 'Malformed 64-bit')
   fixed64bit.bytes = 8
   return buf.subarray(byteOffset, byteOffset + 8)
 }
 
 export function fixed32bit (buf, byteOffset = 0) {
-  assert(buf.byteLength - byteOffset >= 4, 'Malformed 64-bit')
+  //assert(buf.byteLength - byteOffset >= 4, 'Malformed 64-bit')
   fixed32bit.bytes = 4
   return buf.subarray(byteOffset, byteOffset + 4)
 }

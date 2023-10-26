@@ -8,9 +8,11 @@ export const tag = (bigint)=>{
   return { wireType, fieldNumber }
 }
 
+const {MAX_SAFE_INTEGER, MIN_SAFE_INTEGER} = Number;
+
 export const uint64 = (bigint)=>{
   var r = BigInt.asUintN(64, bigint);
-  if (r <= Number.MAX_SAFE_INTEGER) {
+  if (r <= MAX_SAFE_INTEGER) {
     r = Number(r)
   }
   return r
@@ -19,7 +21,7 @@ export const uint64 = (bigint)=>{
 export const uint32 = (bigint)=> Number(BigInt.asUintN(32, bigint))
 
 const toNum = (r)=>{
-  if ((r <= Number.MAX_SAFE_INTEGER) && (r>=Number.MIN_SAFE_INTEGER)) {
+  if ((r <= MAX_SAFE_INTEGER) && (r>=MIN_SAFE_INTEGER)) {
     r = Number(r)
   }
   return r
