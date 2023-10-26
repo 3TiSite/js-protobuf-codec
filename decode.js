@@ -29,7 +29,7 @@ export default (func_li, default_li)=>{
     }
     
     default_li.forEach((v,p)=>{
-      if(li[p]===undefined){
+      if(!(p in li)){
         if(array_pos.has(p)){
           v = [];
         }
