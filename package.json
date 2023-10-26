@@ -1,7 +1,7 @@
 {
   "name": "@3-/proto",
   "type": "module",
-  "version": "2.0.18",
+  "version": "2.0.19",
   "description": "Minimal Protocol Buffers wire encoding/decoding",
   "scripts": {
     "test": "tape 'test/**/*.{mjs,js}'",

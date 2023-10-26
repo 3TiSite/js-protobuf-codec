@@ -25,19 +25,15 @@ export default (func_li, default_li)=>{
 }
 
 export const nodefault = (func_li, array_pos)=>(msg)=>{
-  var o,n,data,t,li=[];
-
+  var o,n,data,li=[];
+  for(n of array_pos){
+    li[n]=[];
+  }
   for ([n,{data}] of Reader(msg)) {
     o = func_li[--n](data);
-    t = li[n];
 
     if(array_pos.includes(n)) {
-      data = li[n];
-      if(data){
-        data.push(o)
-      }else{
-        li[n] = [o]
-      }
+      li[n].push(o)
     } else {
       li[n] = o
     }
