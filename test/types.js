@@ -4,9 +4,9 @@ const decode = require('../decode/types.js')
 const decodeWire = require('../decode/wire-types.js')
 const encode = require('../encode/types.js')
 
-test('enumerable', assert => {
-  ;[0, -1, 1, 2 ** 31 - 1, encode.enumerable.MIN_VALUE, encode.enumerable.MAX_VALUE].forEach(n => {
-    assert.looseEqual(decode.enumerable(decodeWire.varint(encode.enumerable.encode(n))), n)
+test('enum_', assert => {
+  ;[0, -1, 1, 2 ** 31 - 1, encode.enum_.MIN_VALUE, encode.enum_.MAX_VALUE].forEach(n => {
+    assert.looseEqual(decode.enum_(decodeWire.varint(encode.enum_.encode(n))), n)
   })
   assert.end()
 })

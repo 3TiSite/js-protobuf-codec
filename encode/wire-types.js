@@ -262,10 +262,10 @@ function _view (bytes) {
   return new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
 }
 
-export const enumerable = {
+export const enum_ = {
   encode (en, buf = alloc(this, en), byteOffset = 0) {
-    assert(en >= enumerable.MIN_VALUE, 'enum value exceeds MIN_VALUE')
-    assert(en <= enumerable.MAX_VALUE, 'enum value exceeds MAX_VALUE')
+    assert(en >= enum_.MIN_VALUE, 'enum value exceeds MIN_VALUE')
+    assert(en <= enum_.MAX_VALUE, 'enum value exceeds MAX_VALUE')
 
     en = Number(en) >>> 0 // cast to uint32 for varint encoding
     varint.encode(en, buf, byteOffset)
@@ -273,8 +273,8 @@ export const enumerable = {
     return buf.subarray(byteOffset, byteOffset + this.encode.bytes)
   },
   encodingLength (en) {
-    assert(en >= enumerable.MIN_VALUE, 'enum value exceeds MIN_VALUE')
-    assert(en <= enumerable.MAX_VALUE, 'enum value exceeds MAX_VALUE')
+    assert(en >= enum_.MIN_VALUE, 'enum value exceeds MIN_VALUE')
+    assert(en <= enum_.MAX_VALUE, 'enum value exceeds MAX_VALUE')
     return varint.encodingLength(Number(en) >>> 0)
   },
   MIN_VALUE: -(1n << 31n),
@@ -306,7 +306,7 @@ export const utf8 = {
 //   bool,
 //   double,
 //   float,
-//   enumerable,
+//   enum_,
 //   utf8,
 //   alloc
 // }

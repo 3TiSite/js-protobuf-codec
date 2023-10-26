@@ -29,7 +29,7 @@ const _view = (bytes)=>new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLe
 export const bool = (bigint)=>bigint !== 0n
 export const bytes = (bytes)=>bytes
 export const double = (bytes)=>_view(bytes).getFloat64(0, true)
-export const enumerable = (uint)=>Number(uint) | 0 // trick to cast uint to int
+export const enum_ = (uint)=>Number(uint) | 0 // trick to cast uint to int
 export const fixed32 = (bytes)=>_view(bytes).getUint32(0, true)
 export const fixed64 = (bytes)=>_view(bytes).getBigUint64(0, true)
 export const float = (bytes)=>_view(bytes).getFloat32(0, true)
@@ -49,7 +49,7 @@ export const string  = utf8d;
 //   sint64,
 //   sint32,
 //   bool,
-//   enumerable,
+//   enum_,
 //   bytes,
 //   string,
 //   fixed64,
