@@ -24,6 +24,13 @@ export default (func_li, default_li)=>{
   }
 }
 
+export const one = (func, default_val)=>(msg)=>{
+  for (var i of Reader(msg)) {
+    return func(i[1].data)
+  }
+  return default_val
+}
+
 export const nodefault = (func_li, array_pos)=>(msg)=>{
   var o,n,data,li=[];
   for(n of array_pos){
