@@ -11,42 +11,45 @@ export default (func_li, default_li)=>{
   );
   var func = nodefault(func_li, array_pos);
   return (msg)=>{
-    !msg.length && return;
-    var li = func(msg); 
-    default_li.forEach((v,p)=>{
-      if(!(p in li)){
-        if(array_pos.includes(p)){
-          v = [];
+    if(msg.length){
+      var li = func(msg); 
+      default_li.forEach((v,p)=>{
+        if(!(p in li)){
+          if(array_pos.includes(p)){
+            v = [];
+          }
+          li[p] = v;
         }
-        li[p] = v;
-      }
-    });
-    return li
+      });
+      return li
+    }
   }
 }
 
 export const one = (func, default_val)=>(msg)=>{
-  !msg.length && return;
-  for (var i of Reader(msg)) {
-    return func(i[1].data)
+  if(msg.length){
+    for (var i of Reader(msg)) {
+      return func(i[1].data)
+    }
+    return default_val
   }
-  return default_val
 }
 
 export const nodefault = (func_li, array_pos)=>(msg)=>{
-  !msg.length && return;
-  var o,n,data,li=[];
-  for(n of array_pos){
-    li[n]=[];
-  }
-  for ([n,{data}] of Reader(msg)) {
-    o = func_li[--n](data);
-
-    if(array_pos.includes(n)) {
-      li[n].push(o)
-    } else {
-      li[n] = o
+  if(msg.length){
+    var o,n,data,li=[];
+    for(n of array_pos){
+      li[n]=[];
     }
-  } 
-  return li
+    for ([n,{data}] of Reader(msg)) {
+      o = func_li[--n](data);
+
+      if(array_pos.includes(n)) {
+        li[n].push(o)
+      } else {
+        li[n] = o
+      }
+    } 
+    return li
+  }
 }
