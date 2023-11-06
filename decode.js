@@ -11,6 +11,7 @@ export default (func_li, default_li)=>{
   );
   var func = nodefault(func_li, array_pos);
   return (msg)=>{
+    !msg.length && return;
     var li = func(msg); 
     default_li.forEach((v,p)=>{
       if(!(p in li)){
@@ -25,6 +26,7 @@ export default (func_li, default_li)=>{
 }
 
 export const one = (func, default_val)=>(msg)=>{
+  !msg.length && return;
   for (var i of Reader(msg)) {
     return func(i[1].data)
   }
@@ -32,6 +34,7 @@ export const one = (func, default_val)=>(msg)=>{
 }
 
 export const nodefault = (func_li, array_pos)=>(msg)=>{
+  !msg.length && return;
   var o,n,data,li=[];
   for(n of array_pos){
     li[n]=[];
