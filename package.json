@@ -1,7 +1,7 @@
 {
   "name": "@3-/proto",
   "type": "module",
-  "version": "2.0.23",
+  "version": "2.0.25",
   "description": "Minimal Protocol Buffers wire encoding/decoding",
   "scripts": {
     "test": "tape 'test/**/*.{mjs,js}'",
@@ -24,8 +24,11 @@
   "license": "MIT",
   "homepage": "https://github.com/3TiSite/js-protobuf-codec",
   "devDependencies": {
+    "@3-/loader": "^0.0.2",
+    "@3-/write": "^0.0.1",
     "standard": "^17.1.0",
-    "tape": "^5.7.2"
+    "tape": "^5.7.2",
+    "zx": "^7.2.3"
   },
   "dependencies": {
     "@3-/utf8": "^0.0.3",

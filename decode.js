@@ -30,18 +30,9 @@ export const li = (func)=>(msg)=>{
   if(msg.length){
     var r = []
     for (var i of Reader(msg)) {
-      r.push(func(i[0].data))
+      r.push(func(i[1].data))
     }
     return r
-  }
-}
-
-export const one = (func, default_val)=>(msg)=>{
-  if(msg.length){
-    for (var i of Reader(msg)) {
-      return func(i[1].data)
-    }
-    return default_val
   }
 }
 
@@ -63,3 +54,4 @@ export const nodefault = (func_li, array_pos)=>(msg)=>{
     return li
   }
 }
+
